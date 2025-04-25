@@ -126,15 +126,18 @@
   </div>
 
   <!-- Scripts -->
-  <script type="module">
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
+  // Configuración Firebase
+  const firebaseConfig = {
     apiKey: "AIzaSyD29DiaYJ1s3GeOSJKquL2jElp8NVoXAII",
     authDomain: "login-de-diagnostico-de-placa.firebaseapp.com",
     projectId: "login-de-diagnostico-de-placa",
@@ -143,32 +146,34 @@
     appId: "1:248604555689:web:f0f0f226bd8cd377dd6cb8"
   };
 
-  // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
 
-    window.login = () => signInWithPopup(auth, provider).catch(error => alert("Error al iniciar sesión: " + error.message));
-    window.logout = () => signOut(auth);
+  window.login = () => signInWithPopup(auth, provider).catch(error => alert("Error al iniciar sesión: " + error.message));
+  window.logout = () => signOut(auth);
 
-    onAuthStateChanged(auth, user => {
-      const loginContainer = document.getElementById("loginContainer");
-      const appContent = document.getElementById("appContent");
-      const emailText = document.getElementById("emailText");
-      const logoutBtn = document.getElementById("logoutBtn");
+  onAuthStateChanged(auth, user => {
+    const loginContainer = document.getElementById("loginContainer");
+    const appContent = document.getElementById("appContent");
+    const emailText = document.getElementById("emailText");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-      if (user) {
-        loginContainer.style.display = "none";
-        appContent.style.display = "flex";
-        appContent.classList.add("hud-appear");
-        emailText.textContent = user.email;
-        logoutBtn.style.display = "inline-block";
-      } else {
-        loginContainer.style.display = "flex";
-        appContent.style.display = "none";
-        logoutBtn.style.display = "none";
-        emailText.textContent = "";
-      }
-    });
-  </script>
+    if (user) {
+      loginContainer.style.display = "none";
+      appContent.style.display = "flex";
+      appContent.classList.add("hud-appear");
+      emailText.textContent = user.email;
+      logoutBtn.style.display = "inline-block";
+    } else {
+      loginContainer.style.display = "flex";
+      appContent.style.display = "none";
+      logoutBtn.style.display = "none";
+      emailText.textContent = "";
+    }
+  });
+</script>
+
 
 
 <script>
