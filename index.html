@@ -126,22 +126,7 @@
   </div>
 
   <!-- Scripts -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBt6OlcaDWbhx-ldI4l0a4kDPu8U1dm48c",
-      authDomain: "login-de-lista-de-fallas.firebaseapp.com",
-      projectId: "login-de-lista-de-fallas",
-      storageBucket: "login-de-lista-de-fallas.firebasestorage.app",
-      messagingSenderId: "632649294661",
-      appId: "1:632649294661:web:9c6daa894931936c87142c"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
 
     window.login = () => signInWithPopup(auth, provider).catch(error => alert("Error al iniciar sesión: " + error.message));
     window.logout = () => signOut(auth);
