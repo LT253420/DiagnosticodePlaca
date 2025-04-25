@@ -131,25 +131,6 @@
     window.login = () => signInWithPopup(auth, provider).catch(error => alert("Error al iniciar sesión: " + error.message));
     window.logout = () => signOut(auth);
 
-    onAuthStateChanged(auth, user => {
-      const loginContainer = document.getElementById("loginContainer");
-      const appContent = document.getElementById("appContent");
-      const emailText = document.getElementById("emailText");
-      const logoutBtn = document.getElementById("logoutBtn");
-
-      if (user) {
-        loginContainer.style.display = "none";
-        appContent.style.display = "flex";
-        appContent.classList.add("hud-appear");
-        emailText.textContent = user.email;
-        logoutBtn.style.display = "inline-block";
-      } else {
-        loginContainer.style.display = "flex";
-        appContent.style.display = "none";
-        logoutBtn.style.display = "none";
-        emailText.textContent = "";
-      }
-    });
   </script>
 
 
