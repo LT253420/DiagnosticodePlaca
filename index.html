@@ -15,11 +15,6 @@
     </div>
   </div>
 
-  <!-- Login -->
-  <div id="loginContainer">
-    <h1>Diagnóstico de Placa</h1>
-    <button id="loginBtn" onclick="login()">Acceder con Google</button>
-  </div>
 
   <!-- Top bar -->
   <div class="top-bar">
@@ -126,10 +121,6 @@
   </div>
 
   <!-- Scripts -->
-
-
-    window.login = () => signInWithPopup(auth, provider).catch(error => alert("Error al iniciar sesión: " + error.message));
-    window.logout = () => signOut(auth);
 
   </script>
 
