@@ -188,8 +188,17 @@ function showResponse(falla) {
       
       const btn = document.createElement("button");
       btn.textContent = titulo;
+      btn.classList.add("boton-base");  // 👈 AÑADÍ ESTO
       btn.onclick = () => {
       respuestas.querySelectorAll(".response-box.dynamic").forEach(e => e.remove());
+
+      const box = document.createElement("div");
+      box.className = "response-box hud-appear dynamic";
+      box.innerHTML = `➡ ${descripcion}`;
+      respuestas.appendChild(box);
+};
+respuestas.appendChild(btn);
+
         
         const box = document.createElement("div");
         box.className = "response-box hud-appear dynamic";
