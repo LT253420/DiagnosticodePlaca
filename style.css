@@ -438,6 +438,16 @@ body.light-mode .footer {
   user-select: none;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".boton-base").forEach(boton => {
+    const texto = boton.textContent.toLowerCase();
+    if (texto.includes("correcta")) {
+      boton.classList.add("correcta");
+    } else if (texto.includes("incorrecta")) {
+      boton.classList.add("incorrecta");
+    }
+  });
+});
 
 
 
