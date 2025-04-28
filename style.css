@@ -37,7 +37,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
+
 
 /* Modo claro solo cambia imagen y fondo */
 body.light-mode {
