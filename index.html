@@ -211,31 +211,32 @@ respuestas.appendChild(btn);
 }
   
 function mostrarComoUsar() {
-  ocultarTodo();
-  const uso = document.getElementById("usoMenu");
-  uso.style.display = "flex";
-  requestAnimationFrame(() => {
-    uso.classList.add("hud-appear");
-  });
+    ocultarTodo();
+    const uso = document.getElementById("uso");
+    uso.style.display = "flex";
+    requestAnimationFrame(() => {
+        uso.classList.add("hud-appear");
+    });
 }
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 function mostrarFallas() {
-  ocultarTodo();
-  const fallas = document.getElementById("fallasMenu");
-  fallas.style.display = "flex";
-  requestAnimationFrame(() => {
-    fallas.classList.add("hud-appear");
-  });
+    ocultarTodo();
+    const fallas = document.getElementById("fallas");
+    fallas.style.display = "flex";
+    requestAnimationFrame(() => {
+        fallas.classList.add("hud-appear");
+    });
 }
   
 function mostrarContacto() {
-  ocultarTodo();
-  const contactoMenu = document.getElementById('contactoMenu');
-  contactoMenu.style.display = 'flex';
-  void contactoMenu.offsetWidth;
-  contactoMenu.classList.add("hud-appear");
+    ocultarTodo();
+    const contacto = document.getElementById("contacto");
+    contacto.style.display = "flex";
+    requestAnimationFrame(() => {
+        contacto.classList.add("hud-appear");
+    });
 }
 
 
@@ -258,14 +259,13 @@ function goToHome() {
     }
 
 function ocultarTodo() {
-  ["mainMenu", "usoMenu", "fallasMenu", "respuestas", "contactoMenu"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.style.display = "none";
-    }
-  });
+    const secciones = ["uso", "fallas", "contacto"];
+    secciones.forEach(id => {
+        const seccion = document.getElementById(id);
+        seccion.style.display = "none";
+        seccion.classList.remove("hud-appear");
+    });
 }
-
 
 
     const preloader = document.getElementById("preloader");
