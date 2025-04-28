@@ -155,8 +155,6 @@
   });
 </script>
 
-
-
 <script>
     const respuestasPorFalla = {
       "No enciende": [
@@ -194,7 +192,7 @@ function showResponse(falla) {
       
       const btn = document.createElement("button");
       btn.textContent = titulo;
-      btn.classList.add("boton-base");  // 👈 AÑADÍ ESTO
+      btn.classList.add("boton-base");
       btn.onclick = () => {
       respuestas.querySelectorAll(".response-box.dynamic").forEach(e => e.remove());
 
@@ -204,9 +202,6 @@ function showResponse(falla) {
       respuestas.appendChild(box);
 };
 respuestas.appendChild(btn);
-
-        
-   
     });
   }
 }
@@ -253,11 +248,11 @@ function volverA(seccion) {
 
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
-  }
+}
 
 function goToHome() {
       volverA("main");
-    }
+}
 
 function ocultarTodo() {
     const secciones = ["uso", "fallas", "contacto"];
@@ -267,7 +262,6 @@ function ocultarTodo() {
         seccion.classList.remove("hud-appear");
     });
 }
-
 
     const preloader = document.getElementById("preloader");
     const fill = document.getElementById("progressFill");
@@ -302,15 +296,13 @@ function ocultarTodo() {
     botones.forEach(boton => {
       const texto = boton.textContent.toLowerCase();
       if (texto.includes('correcta')) {
-        boton.classList.add('correcta');
+        boton.classList.add("correcta");
       } else if (texto.includes('incorrecta')) {
-        boton.classList.add('incorrecta');
+        boton.classList.add("incorrecta");
       }
-      // Si no contiene, queda normal
     });
   });
+</script>
 
-
-  </script>
 </body>
 </html>
