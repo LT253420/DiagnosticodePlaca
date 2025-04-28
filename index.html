@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+  <body> 
   <!-- Pantalla de carga -->
   <div id="preloader">
     <div class="loading-container">
@@ -28,7 +29,7 @@
   </div>
 
   <!-- Contenido principal -->
-  <div id="appContent" style="display:none; flex-direction: column; align-items: center; width: 100%;">
+    
     <h1>Diagnóstico de Placa</h1>
 
     <div class="button-container" id="mainMenu">
@@ -212,7 +213,7 @@ respuestas.appendChild(btn);
   
 function mostrarComoUsar() {
     ocultarTodo();
-    const uso = document.getElementById("uso");
+    const uso = document.getElementById("usoMenu");
     uso.style.display = "flex";
     requestAnimationFrame(() => {
         uso.classList.add("hud-appear");
@@ -223,7 +224,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 function mostrarFallas() {
     ocultarTodo();
-    const fallas = document.getElementById("fallas");
+    const fallas = document.getElementById("fallasMenu");
     fallas.style.display = "flex";
     requestAnimationFrame(() => {
         fallas.classList.add("hud-appear");
@@ -232,7 +233,7 @@ function mostrarFallas() {
   
 function mostrarContacto() {
     ocultarTodo();
-    const contacto = document.getElementById("contacto");
+    const contacto = document.getElementById("contactoMenu");
     contacto.style.display = "flex";
     requestAnimationFrame(() => {
         contacto.classList.add("hud-appear");
