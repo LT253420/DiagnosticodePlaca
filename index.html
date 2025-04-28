@@ -255,26 +255,17 @@ function toggleTheme() {
 
 function goToHome() {
       volverA("main");
-       ocultarTodo();
-  if (menu === 'main') {
-    document.getElementById('mainMenu').style.display = 'flex';
-  } else if (menu === 'fallas') {
-    document.getElementById('fallasMenu').style.display = 'flex';
-  }
     }
 
 function ocultarTodo() {
-      ["mainMenu", "usoMenu", "fallasMenu", "respuestas", "contactoMenu"].forEach(id => {
-        const el = document.getElementById(id);
-        el.style.display = "none";
-      });
-     // document.getElementById("respuestas").innerHTML = "";
-   document.getElementById('mainMenu').style.display = 'none';
-  document.getElementById('usoMenu').style.display = 'none';
-  document.getElementById('fallasMenu').style.display = 'none';
-  document.getElementById('contactoMenu').style.display = 'none';
-  document.getElementById('respuestas').style.display = 'none';
+  ["mainMenu", "usoMenu", "fallasMenu", "respuestas", "contactoMenu"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = "none";
     }
+  });
+}
+
 
 
     const preloader = document.getElementById("preloader");
