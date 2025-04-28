@@ -159,7 +159,7 @@ button:hover {
   width: 55px;
   height: 55px;
   border: 2px solid #00c3ff;
-  background: #292929; </transparent si querés que sea transparente. Sino, #292929/>
+  background: #292929; /*transparent si querés que sea transparente. Sino, #292929*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -376,11 +376,10 @@ button:hover {
   animation: holographic-fade 0.4s ease-out;
 }
 
-
   .response-box {
     font-size: 0.95rem;
   }
-}
+
 .fade-in {
   animation: fadeIn 0.4s ease-in-out;
 }
