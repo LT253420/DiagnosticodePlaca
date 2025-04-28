@@ -96,6 +96,57 @@
     </div>
   </div>
 
+    <!-- Scripts de Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+
+<script>
+  // Configuración de tu proyecto (copiado desde Firebase Console)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAq9IhfWEVyt-Cf-mWcwuF3JfuqAlc0k8I",
+    authDomain: "lista-fallas.firebaseapp.com",
+    projectId: "lista-fallas",
+    storageBucket: "lista-fallas.appspot.com",
+    messagingSenderId: "255303348505",
+    appId: "1:255303348505:web:c37b826c44080117b94a95"
+  };
+
+  // Inicializar Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+    <script>
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  function loginWithGoogle() {
+    firebase.auth().signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        document.getElementById('user-info').textContent = `Bienvenido, ${user.displayName}`;
+        document.getElementById('login-button').style.display = 'none';
+        document.getElementById('logout-button').style.display = 'inline-block';
+      })
+      .catch((error) => {
+        console.error("Error al iniciar sesión:", error);
+        alert("Hubo un error al iniciar sesión. Revisá la consola para más detalles.");
+      });
+  }
+
+  function logout() {
+    firebase.auth().signOut()
+      .then(() => {
+        document.getElementById('user-info').textContent = '';
+        document.getElementById('login-button').style.display = 'inline-block';
+        document.getElementById('logout-button').style.display = 'none';
+      })
+      .catch((error) => {
+        console.error("Error al cerrar sesión:", error);
+        alert("Hubo un error al cerrar sesión. Revisá la consola para más detalles.");
+      });
+  }
+</script>
+
+    
   <!-- Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
