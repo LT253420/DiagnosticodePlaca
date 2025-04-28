@@ -23,6 +23,10 @@ html, body {
   min-height: 100vh; /* mínimo 100% de la altura de la ventana */
 }
 
+main {
+  flex-grow: 1; /* ocupa el espacio disponible */
+}
+
 /* Contenedor principal */
 body {
   display: flex;
