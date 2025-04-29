@@ -17,15 +17,6 @@ html, body {
   overflow-y: auto;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* mínimo 100% de la altura de la ventana */
-}
-
-main {
-  flex-grow: 1; /* ocupa el espacio disponible */
-}
 
 /* Contenedor principal */
 body {
@@ -46,10 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
-
 
 /* Modo claro solo cambia imagen y fondo */
 body.light-mode {
@@ -100,7 +88,6 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  flex-grow: 1; /* ocupa el espacio disponible */
 }
 
 
@@ -136,7 +123,7 @@ button:hover {
 /* Footer */
 .footer {
   position: relative;
-  padding: 10px 0;
+  padding: 20px 0;
   padding-bottom: 60px;
   margin-top: 40px;
   text-align: center;
@@ -165,7 +152,7 @@ button:hover {
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 0 8px #00ff0055;
+  box-shadow: 0 0 8px #00c3ff55;
   transition: all 0.3s ease;
   z-index: 999;
 }
@@ -229,34 +216,6 @@ button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* Botón Correcta */
-.correcta::after {
-  background-color: #00ff00;
-  color: #111;
-  border-left: 2px solid #00ff00;
-}
-.correcta:hover {
-  background-color: rgba(0, 255, 0, 0.15); /* verde suave en hover */
-  box-shadow: 0 0 15px #00ff00;
-}
-
-/* Botón Incorrecta */
-.incorrecta::after {
-  background-color: #ff0000;
-  color: #111;
-  border-left: 2px solid #ff0000;
-}
-.incorrecta:hover {
-  background-color: rgba(255, 0, 0, 0.15); /* rojo suave en hover */
-  box-shadow: 0 0 15px #ff0000;
-}
-
-/* Botón Normal */
-.boton-base:not(.correcta):not(.incorrecta):hover {
-  background-color: rgba(0, 175, 255, 0.2); /* azul suave */
-  box-shadow: 0 0 15px #00afff;
 }
 
 /* ANIMACIÓN DE CARGA */
@@ -376,10 +335,11 @@ button:hover {
   animation: holographic-fade 0.4s ease-out;
 }
 
+
   .response-box {
     font-size: 0.95rem;
   }
-
+}
 .fade-in {
   animation: fadeIn 0.4s ease-in-out;
 }
@@ -438,7 +398,7 @@ body.light-mode .response-box,
 body.light-mode p,
 body.light-mode .top-bar,
 body.light-mode .footer {
-  text-shadow: 1px 1px 2px #00000088;
+  text-shadow: 1px 1px 4px #00000088;
 }
 
 
@@ -450,16 +410,6 @@ body.light-mode .footer {
   user-select: none;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".boton-base").forEach(boton => {
-    const texto = boton.textContent.toLowerCase();
-    if (texto.includes("correcta")) {
-      boton.classList.add("correcta");
-    } else if (texto.includes("incorrecta")) {
-      boton.classList.add("incorrecta");
-    }
-  });
-});
 
 
 
