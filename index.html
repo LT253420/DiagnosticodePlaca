@@ -60,8 +60,30 @@
 
     <div class="button-container" id="fallasMenu" style="display:none;">
       <button onclick="volverA('main')">← Volver</button>
-      <button onclick="showResponse('No enciende')">No enciende</button>
+<button onclick="showResponse('Camara no funciona')">Camara no funciona</button>
+</div>
 
+<div class="button-container" id="Camara no funciona" style="display: none;">
+  <button onclick="showResponse('Medir señales de referencia')">Medir señales de referencia</button>
+</div>
+
+<div class="button-container" id="Medir señales de referencia" style="display: none;">
+  <button onclick="showResponse('Correcta medición de señales de referencia')">Correcta medición de señales de referencia</button>
+  <button onclick="showResponse('Incorrecta mediciones de señales de referencia')">Incorrecta mediciones de señales de referencia</button>
+</div>
+
+<div class="button-container" id="Correcta medición de señales de referencia" style="display: none;">
+  <button onclick="showResponse('Medir alimentación: 1.8v, 1.2v, 2.8v')">Medir alimentación: 1.8v, 1.2v, 2.8v</button>
+</div>
+
+<div class="button-container" id="Medir alimentación: 1.8v, 1.2v, 2.8v" style="display: none;">
+  <button onclick="showResponse('Correcta medición de alimentación')">Correcta medición de alimentación</button>
+  <button onclick="showResponse('Incorrecta medición de alimentación')">Incorrecta medición de alimentación</button>
+</div>
+
+<div class="button-container" id="Correcta medición de alimentación" style="display: none;">
+  <button onclick="showResponse('Medir control')">Medir control</button>
+</div>
 
     </div>
     
@@ -192,12 +214,27 @@
 
 <script>
     const respuestasPorFalla = {
-      "No enciende": [
-        ["Revisar batería", "Medir batería para saber si funciona."],
-        ["Botón de encendido", "Verificar si el botón funciona correctamente."],
-        ["Placa base", "Posible falla de alimentación o cortocircuito."]
-      ]
-    };
+  "Camara no funciona": [
+    ["¿Mediste las señales de referencia de la cámara?", "Procedé a medirlas."]
+  ],
+  "Medir señales de referencia": [],
+  "Correcta medición de señales de referencia": [
+    ["¿Mediste las alimentaciones?", "Medí 1.8v, 1.2v y 2.8v."]
+  ],
+  "Incorrecta mediciones de señales de referencia": [
+    ["Solución:", "Si el valor está OL (abierto o muy alto), el problema suele ser un resistor, filtro EMI, bobina o IC. Si está en 0 (corto o muy bajo), el culpable suele ser un condensador o IC."]
+  ],
+  "Medir alimentación: 1.8v, 1.2v, 2.8v": [],
+  "Correcta medición de alimentación": [
+    ["¿Mediste el control?", "Medí señales como enable o triggers."]
+  ],
+  "Incorrecta medición de alimentación": [
+    ["Solución:", "Recordá medir el control 'enable' del LDO. Podría tener un LDO, un PMIC dedicado a cámaras o incluso el PMIC principal podría estar alimentándolas."]
+  ],
+  "Medir control": [
+    ["Solución:", "Estas líneas de comunicación (SDA, SCL, RST, CLK, etc.) se miden con osciloscopio. Si no tenés uno, podés medir su voltaje con multímetro."]
+  ]
+};
 
 function showResponse(falla) {
   ocultarTodo();
