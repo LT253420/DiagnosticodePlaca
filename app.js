@@ -462,3 +462,135 @@ document.getElementById("pwdInput")?.addEventListener("input", () => {
   input?.classList.remove("error", "shake");
   if (error) { error.style.display = "none"; error.textContent = ""; }
 });
+
+
+// ==================== ÁRBOL: Fallas en placa (CÁMARA) ====================
+// Estructura declarativa (fácil de extender)
+const placaTreeData = {
+  title: "La cámara no funciona",
+  step: "Paso a seguir: medir señales de referencia",
+  options: [
+    {
+      label: "Correcta medición de señales de referencia",
+      next: {
+        title: "Medición de alimentación",
+        step: "Paso a seguir: Medir 1.8V, 1.2V, 2.8V",
+        options: [
+          {
+            label: "Correcta medición de alimentación",
+            next: {
+              title: "Medición de control",
+              step: "Paso a seguir: Medir líneas SDA, SCL, RST, CLK (ideal osciloscopio; si no, medir voltaje con multímetro).",
+              solution:
+                "Estas líneas de comunicación (SDA, SCL, RST, CLK, etc.) se miden con osciloscopio. Si no tenés, podés verificar tensiones con multímetro como orientación."
+            }
+          },
+          {
+            label: "Incorrecta medición de alimentación",
+            solution:
+              "Verificar fuente de alimentación (PMIC/LDO). Recordá medir la señal de control (EN/ENABLE) del LDO. Según el equipo, puede alimentarla un LDO dedicado, un PMIC de cámaras o el PMIC principal."
+          }
+        ]
+      }
+    },
+    {
+      label: "Incorrecta medición de señales de referencia",
+      solution:
+        "Si el valor está OL (abierto/muy alto), el problema suele ser resistor, filtro EMI, bobina o IC. Si está en 0 (corto/muy bajo), el responsable suele ser un condensador o IC."
+    }
+  ]
+};
+
+// ==================== Render del árbol ====================
+let placaStack = []; // historial para "Atrás"
+
+function placaNodoActual() {
+  // último de la pila o raíz
+  return placaStack.length ? placaStack[placaStack.length - 1] : placaTreeData;
+}
+
+function renderPlacaNodo(nodo) {
+  const cont = document.getElementById("placaTree");
+  if (!cont) return;
+  cont.innerHTML = "";
+
+  // Título (H2) + Paso
+  const h2 = document.createElement("h2");
+  h2.textContent = nodo.title || "Fallas en placa";
+  h2.className = "hud-appear";
+  h2.style.marginTop = "0";
+  cont.appendChild(h2);
+
+  if (nodo.step) {
+    const p = document.createElement("div");
+    p.className = "response-box hud-appear";
+    p.textContent = nodo.step;
+    cont.appendChild(p);
+  }
+
+  // Si hay solución final, mostramos caja y terminamos
+  if (nodo.solution) {
+    const sol = document.createElement("div");
+    sol.className = "response-box hud-appear";
+    sol.innerHTML = `➡ ${nodo.solution}`;
+    cont.appendChild(sol);
+    return;
+  }
+
+  // Mostrar opciones como botones
+  if (Array.isArray(nodo.options)) {
+    nodo.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt.label;
+      btn.onclick = () => {
+        if (opt.next) {
+          placaStack.push(opt.next);
+          renderPlacaNodo(opt.next);
+        } else if (opt.solution) {
+          // “Hoja” con solución
+          const leaf = { title: nodo.title, step: nodo.step, solution: opt.solution };
+          placaStack.push(leaf);
+          renderPlacaNodo(leaf);
+        }
+      };
+      cont.appendChild(btn);
+    });
+  }
+}
+
+// ==================== UI helpers para este módulo ====================
+window.mostrarFallasPlaca = () => {
+  // Reutilizamos tu helper si existe
+  if (typeof window.ocultarTodo === "function") window.ocultarTodo();
+  const sec = document.getElementById("placaMenu");
+  if (sec) {
+    sec.style.display = "flex";
+    sec.classList.add("hud-appear");
+  }
+  // reset de navegación y render raíz
+  placaStack = [];
+  renderPlacaNodo(placaTreeData);
+};
+
+window.placaAtras = () => {
+  if (!placaStack.length) {
+    // volver al menú de fallas si querés
+    if (typeof window.mostrarFallas === "function") {
+      window.mostrarFallas();
+    } else {
+      // o al main
+      if (typeof window.volverA === "function") window.volverA("main");
+    }
+    // ocultar sección
+    const sec = document.getElementById("placaMenu");
+    if (sec) sec.style.display = "none";
+    return;
+  }
+  placaStack.pop();
+  renderPlacaNodo(placaNodoActual());
+};
+
+window.placaReiniciar = () => {
+  placaStack = [];
+  renderPlacaNodo(placaTreeData);
+};
