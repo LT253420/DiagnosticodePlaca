@@ -62,7 +62,7 @@
 
     <div class="button-container" id="mainMenu">
       <button onclick="mostrarComoUsar()">Cómo usar</button>
-      <button onclick="mostrarFallas()">Inicio - Ver fallas</button>
+      <button onclick="mostrarFallasPlaca()">Inicio - Ver fallas</button>
       <button onclick="mostrarContacto()">Contacto - Soporte</button>
       <button onclick="toggleTheme()">Modo Claro / Oscuro</button>
 
@@ -206,7 +206,21 @@
       <div>By Lucas M. Tuillier</div>
     </div>
   </div>
-  
+
+    <section id="placaMenu" style="display:none; flex-direction:column; align-items:center; gap:16px;">
+  <h2 class="holo-anim">Fallas en placa</h2>
+
+  <!-- aquí se va a dibujar el árbol -->
+  <div id="placaTree" class="button-container" style="max-width:640px; width:100%"></div>
+
+  <div style="display:flex; gap:10px; width:100%; max-width:640px;">
+    <button onclick="placaAtras()" style="flex:1;">↩ Atrás</button>
+    <button onclick="placaReiniciar()" style="flex:1;">⟲ Reiniciar</button>
+    <button onclick="volverA('main')" style="flex:1;">← Volver al inicio</button>
+  </div>
+</section>
+
+    
   <script type="module" src="app.js"></script>
   
 </body>
