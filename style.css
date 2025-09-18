@@ -104,7 +104,7 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0 8px #00ff0055;
+  box-shadow: 0 0 8px var(--color-luz);
 }
 
 button:hover {
@@ -155,7 +155,7 @@ button:hover {
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 0 8px #00ff0055;
+  box-shadow: 0 0 8px var(--color-luz);
   transition: all 0.3s ease;
   z-index: 999;
 }
