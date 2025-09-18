@@ -3,12 +3,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebas
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBt6OlcaDWbhx-ldI4l0a4kDPu8U1dm48c",
-  authDomain: "login-de-lista-de-fallas.firebaseapp.com",
-  projectId: "login-de-lista-de-fallas",
-  storageBucket: "login-de-lista-de-fallas.firebasestorage.app",
-  messagingSenderId: "632649294661",
-  appId: "1:632649294661:web:9c6daa894931936c87142c"
+  apiKey: "AIzaSyD29DiaYJ1s3GeOSJKquL2jElp8NVoXAII",
+  authDomain: "login-de-diagnostico-de-placa.firebaseapp.com",
+  projectId: "login-de-diagnostico-de-placa",
+  storageBucket: "login-de-diagnostico-de-placa.firebasestorage.app",
+  messagingSenderId: "248604555689",
+  appId: "1:248604555689:web:f0f0f226bd8cd377dd6cb8"
 };
 
 const app = initializeApp(firebaseConfig);
