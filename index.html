@@ -82,98 +82,7 @@
       </div>
     </div>
 
-    <div class="button-container" id="fallasMenu" style="display:none;">
-      <button onclick="volverA('main')">← Volver</button>
-      <button onclick="showResponse('No enciende')">No enciende</button>
-            <button onclick="showResponse('No tiene sonido')">No tiene sonido</button>
-      <button onclick="showResponse('No puedo hacer llamadas')">No puedo hacer llamadas</button>
-      <button onclick="showResponse('El teléfono se calienta')">El teléfono se calienta</button>
-      <button onclick="showResponse('Mi celular se apaga solo')">Mi celular se apaga solo</button>
-      <button onclick="showResponse('Mi celular se reinicia solo')">Mi celular se reinicia solo</button>
-      <button onclick="showResponse('La pantalla no prende pero el celular funciona')">La pantalla no prende pero el celular funciona</button>
-      <button onclick="showResponse('La pantalla queda en blanco / tiene interferencia')">La pantalla queda en blanco / tiene interferencia</button>
-      <button onclick="showResponse('La pantalla parpadea')">La pantalla parpadea</button>
-      <button onclick="showResponse('Mi celular se apaga cuando llaman')">Mi celular se apaga cuando llaman</button>
-      <button onclick="showResponse('La pantalla se apaga cuando escucho un audio o me llaman')">La pantalla se apaga cuando escucho un audio o me llaman</button>
-      <button onclick="showResponse('Manchas de liquido negro, suciedad o burbujas')">Manchas de liquido negro, suciedad o burbujas</button>
-      <button onclick="showResponse('No escucho cuando me hablan ni puedo escuchar los audios')">No escucho cuando me hablan ni puedo escuchar los audios</button>
-      <button onclick="showResponse('No escuchan mi voz en llamada ni audios')">No escuchan mi voz en llamada ni audios</button>
-      <button onclick="showResponse('No puedo desbloquear el celular (patrón, Contraseña o huella)')">No puedo desbloquear el celular (patrón, Contraseña o huella)</button>
-      <button onclick="showResponse('No carga la batería')">No carga la batería</button>
-      <button onclick="showResponse('El celular no mantiene carga / se desgasta la batería')">El celular no mantiene carga / se desgasta la batería</button>
-      <button onclick="showResponse('Mi celular no es reconocido por la PC')">Mi celular no es reconocido por la PC</button>
-      <button onclick="showResponse('La camara no funciona (la app se cierra o no saca fotos)')">La camara no funciona (la app se cierra o no saca fotos)</button>
-      <button onclick="showResponse('La memoria esta llena (sin archivos, ni apps instaladas)')">La memoria esta llena (sin archivos, ni apps instaladas)</button>
-      <button onclick="showResponse('El celular está lento y se calienta')">El celular está lento y se calienta</button>
-      <button onclick="showResponse('Solo llamadas de emergencia')">Solo llamadas de emergencia</button>
-      <button onclick="showResponse('Wifi No se activa')">Wifi No se activa</button>
-      <button onclick="showResponse('No detecta Teclas o Botones')">No detecta Teclas o Botones</button>
-      <button onclick="showResponse('Vibra al conectar batería / solo vibra')">Vibra al conectar batería / solo vibra</button>
-      <button onclick="showResponse('No lee la memoría extraíble (MicroSD)')">No lee la memoría extraíble (MicroSD)</button>
-      <button onclick="showResponse('Auricular (cable) Funciona A veces')">Auricular (cable) Funciona A veces</button>
-      <button onclick="showResponse('Auricular (inalámbrico / bluetooth) Funciona A veces')">Auricular (inalámbrico / bluetooth) Funciona A veces</button>
-      <button onclick="showResponse('Ingrese código de Desbloqueo al insertar SIM')">Ingrese código de Desbloqueo al insertar SIM</button>
-      <button onclick="showResponse('El Equipo tiene patrón, Clave de usuario o Cuenta de google')">El Equipo tiene patrón, Clave de usuario o Cuenta de google</button>
-      <button onclick="showResponse('el celular Calienta Junto a la batería')">el celular Calienta Junto a la batería</button>
-      <button onclick="showResponse('La pantalla hace rayas como de interferencia, lluvia o lineas de colores')">La pantalla hace rayas como de interferencia, lluvia o lineas de colores</button>
-      <button onclick="showResponse('Solo se escucha el sonido cuando lo acerco a la oreja')">Solo se escucha el sonido cuando lo acerco a la oreja</button>
-      <button onclick="showResponse('Solo se se escucha el sonido en altavoz (en llamada o en audios)')">Solo se se escucha el sonido en altavoz (en llamada o en audios)</button>
-      <button onclick="showResponse('Aparece un triángulo amarillo al encender o cargar (depende del ícono)')">Aparece un triángulo amarillo al encender o cargar (depende del ícono)</button>
-    <div class="boton-base correcta" id="fallasMenu" style="display:none;">
-      <button onclick="volverA('main')">← Volver</button>
-      <button onclick="window.open('https://www.icloud.com/find', '_blank')">Encontrar dispositivo IOS</button>
-      <button onclick="window.open('https://myaccount.google.com/intro/find-your-phone?hl=es', '_blank')">Encontrar dispositivo Android</button>
-    <div class="boton-base incorrecta" id="fallasMenu" style="display:none;">
-      <button onclick="volverA('main')">← Volver</button>
-      <button onclick="window.open('https://www.icloud.com/find', '_blank')">Encontrar dispositivo IOS</button>
-      <button onclick="window.open('https://myaccount.google.com/intro/find-your-phone?hl=es', '_blank')">Encontrar dispositivo Android</button>
-    </div>
     
-    <div id="fallaCarga" class="section" style="display:none;">
-    <h2>Buscar 5V en FPC de main</h2>
-    <div class="button-container">
-        <button class="correcto" onclick="showSubOptions('medirVBUS')">Correcta medición</button>
-        <button class="incorrecto" onclick="showSubOptions('reemplazarFPC')">Incorrecta medición</button>
-    </div>
-</div>
-
-<div id="reemplazarFPC" class="section" style="display:none;">
-    <h2>Solución</h2>
-    <p>Reemplazar FPC de carga.</p>
-</div>
-
-<div id="medirVBUS" class="section" style="display:none;">
-    <h2>Medir Línea VBUS hasta el PMIC</h2>
-    <div class="button-container">
-        <button class="correcto" onclick="showSubOptions('medirSalidasPMIC')">Correcta medición</button>
-        <button class="incorrecto" onclick="showSubOptions('buscarComponente')">Incorrecta medición</button>
-    </div>
-</div>
-
-<div id="buscarComponente" class="section" style="display:none;">
-    <h2>Solución</h2>
-    <p>Buscar en el componente donde se pierde el voltaje y reemplazarlo.</p>
-</div>
-
-<div id="medirSalidasPMIC" class="section" style="display:none;">
-    <h2>Medir salidas del PMIC</h2>
-    <div class="button-container">
-        <button class="correcto" onclick="showSubOptions('funciona')">Correcta medición</button>
-        <button class="incorrecto" onclick="showSubOptions('pmicDaniado')">Incorrecta medición</button>
-    </div>
-</div>
-
-<div id="funciona" class="section" style="display:none;">
-    <h2>¡Funciona!</h2>
-    <p>Problema solucionado.</p>
-</div>
-
-<div id="pmicDaniado" class="section" style="display:none;">
-    <h2>Solución: PMIC dañado o reballing necesario</h2>
-    <p>Realizar reballing en el integrado y colocarlo para verificar su funcionamiento. De no funcionar, se reemplaza por otro PMIC.</p>
-</div>
-    
-    </div>
     
 <div class="button-container" id="contactoMenu" style="display:none;">
   <button onclick="volverA('main')">← Volver</button>
@@ -212,11 +121,12 @@
 
   <!-- aquí se va a dibujar el árbol -->
   <div id="placaTree" class="button-container" style="max-width:640px; width:100%"></div>
-
-  <div style="display:flex; gap:10px; width:100%; max-width:640px;">
-    <button onclick="placaAtras()" style="flex:1;">↩ Atrás</button>
-    <button onclick="placaReiniciar()" style="flex:1;">⟲ Reiniciar</button>
-    <button onclick="volverA('main')" style="flex:1;">← Volver al inicio</button>
+<div class="button-container" id="fallasMenu" style="display:none;">
+      <button onclick="volverA('main')">← Volver</button>
+      <button onclick="window.open('https://www.icloud.com/find', '_blank')">Encontrar dispositivo IOS</button>
+      <button onclick="window.open('https://myaccount.google.com/intro/find-your-phone?hl=es', '_blank')">Encontrar dispositivo Android</button>
+    </div>
+      
   </div>
 </section>
 
