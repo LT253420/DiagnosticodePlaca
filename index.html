@@ -100,9 +100,16 @@
 
 </div>
 
+   <section id="placaMenu" style="display:none; flex-direction:column; align-items:center; gap:16px;">
+  <h2 class="holo-anim">Fallas en placa</h2>
 
-    <div class="button-container" id="respuestas" style="display:none;"></div>
-
+  <!-- aquí se va a dibujar el árbol -->
+  <div id="placaTree" class="button-container" style="max-width:640px; width:100%"></div>
+<div class="button-container" id="fallasMenu" style="display:none;">
+      <button onclick="volverA('main')">← Volver</button>
+      <button onclick="window.open('https://www.icloud.com/find', '_blank')">Encontrar dispositivo IOS</button>
+      <button onclick="window.open('https://myaccount.google.com/intro/find-your-phone?hl=es', '_blank')">Encontrar dispositivo Android</button>
+    </div>
     <!-- Botón flotante home -->
     <button id="backBtn" class="back-button" onclick="goToHome()">
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -116,16 +123,7 @@
     </div>
   </div>
 
-    <section id="placaMenu" style="display:none; flex-direction:column; align-items:center; gap:16px;">
-  <h2 class="holo-anim">Fallas en placa</h2>
-
-  <!-- aquí se va a dibujar el árbol -->
-  <div id="placaTree" class="button-container" style="max-width:640px; width:100%"></div>
-<div class="button-container" id="fallasMenu" style="display:none;">
-      <button onclick="volverA('main')">← Volver</button>
-      <button onclick="window.open('https://www.icloud.com/find', '_blank')">Encontrar dispositivo IOS</button>
-      <button onclick="window.open('https://myaccount.google.com/intro/find-your-phone?hl=es', '_blank')">Encontrar dispositivo Android</button>
-    </div>
+ 
       
   </div>
 </section>
