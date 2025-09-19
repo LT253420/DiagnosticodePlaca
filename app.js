@@ -31,7 +31,6 @@ function setSecondFactorOk(v) { sessionStorage.setItem("secondFactorOk", v ? "1"
 window.login = () =>
   signInWithPopup(auth, provider)
     .then(() => {
-      // tras login, mostrar GATE de contraseña
       setSecondFactorOk(false);
       hide("loginContainer");
       show("passwordGate", "flex");
@@ -43,7 +42,6 @@ window.login = () =>
 window.logout = () => signOut(auth);
 
 // ==================== 2º factor: verificación con feedback y redirección ====================
-// Timer global para no apilar redirecciones
 let redirectTimer = null;
 
 window.verifyPassword = async () => {
@@ -51,7 +49,6 @@ window.verifyPassword = async () => {
   const error = document.getElementById("pwdError");
   if (!input) return;
 
-  // Si había un temporizador previo, lo limpio
   if (redirectTimer) {
     clearInterval(redirectTimer.interval);
     clearTimeout(redirectTimer.timeout);
@@ -62,17 +59,14 @@ window.verifyPassword = async () => {
   const typedHash = await sha256Hex(typed);
 
   if (typedHash === PASSWORD_HASH) {
-    // OK → limpiar estados de error si los hubiera
     input.classList.remove("error", "shake");
     if (error) { error.style.display = "none"; error.textContent = ""; }
 
-    // Mostrar app
     setSecondFactorOk(true);
     hide("passwordGate");
     show("appContent", "flex");
     show("logoutBtn", "inline-block");
   } else {
-    // Incorrecta → feedback visual + cuenta regresiva + redirección a los 5s
     if (error) {
       error.style.display = "block";
       error.textContent = "❌ Contraseña incorrecta. Redirigiendo en 5…";
@@ -87,9 +81,7 @@ window.verifyPassword = async () => {
         if (error && seconds >= 0) {
           error.textContent = `❌ Contraseña incorrecta. Redirigiendo en ${seconds}…`;
         }
-        if (seconds <= 0) {
-          clearInterval(redirectTimer.interval);
-        }
+        if (seconds <= 0) clearInterval(redirectTimer.interval);
       }, 1000),
       timeout: setTimeout(async () => {
         setSecondFactorOk(false);
@@ -110,20 +102,17 @@ onAuthStateChanged(auth, user => {
     logoutBtn.style.display = "inline-block";
 
     if (isSecondFactorOk()) {
-      // ya pasó la contraseña en esta sesión
       hide("loginContainer");
       hide("passwordGate");
       show("appContent", "flex");
       document.getElementById("appContent")?.classList.add("hud-appear");
     } else {
-      // mostrar gate de contraseña
       hide("loginContainer");
       show("passwordGate", "flex");
       hide("appContent");
       requestAnimationFrame(() => document.getElementById("passwordGate")?.classList.add("hud-appear"));
     }
   } else {
-    // no autenticado
     setSecondFactorOk(false);
     show("loginContainer", "flex");
     hide("passwordGate");
@@ -134,14 +123,13 @@ onAuthStateChanged(auth, user => {
 });
 
 // ==================== Datos (globales) ====================
-window.respuestasPorFalla = { /* === tu objeto grande tal cual lo tenías === */ 
-      "No enciende": [
-        ["Revisar batería", "Medir batería para saber si funciona."],
-        ["Botón de encendido", "Verificar si el botón funciona correctamente."],
-        ["Placa base", "Posible falla de alimentación o cortocircuito."]
-      ]
-    };
-
+window.respuestasPorFalla = {
+  "No enciende": [
+    ["Revisar batería", "Medir batería para saber si funciona."],
+    ["Botón de encendido", "Verificar si el botón funciona correctamente."],
+    ["Placa base", "Posible falla de alimentación o cortocircuito."]
+  ]
+};
 
 // ==================== UI helpers (globalizar) ====================
 window.ocultarTodo = () => {
@@ -246,21 +234,34 @@ document.getElementById("pwdInput")?.addEventListener("input", () => {
   if (error) { error.style.display = "none"; error.textContent = ""; }
 });
 
+// ======================================================================
+// ======= Cambios mínimos para botones Correcta / Incorrecta ============
+// ======================================================================
+
+// Helper para crear botones estilados (usa clases .branch-btn, .correcta, .incorrecta)
+function makeBranchButton(text, kind, onClick) {
+  const btn = document.createElement('button');
+  btn.className = 'branch-btn' + (kind ? ' ' + kind : '');
+  btn.innerHTML = `<span class="label">${text}</span>`;
+  btn.addEventListener('click', onClick);
+  return btn;
+}
 
 // ==================== ÁRBOL: Fallas en placa (CÁMARA) ====================
-// Estructura declarativa (fácil de extender)
 const placaTreeData = {
   title: "La cámara no funciona",
   step: "Paso a seguir: medir señales de referencia",
   options: [
     {
       label: "Correcta medición de señales de referencia",
+      kind: "correcta",
       next: {
         title: "Medición de alimentación",
         step: "Paso a seguir: Medir 1.8V, 1.2V, 2.8V",
         options: [
           {
             label: "Correcta medición de alimentación",
+            kind: "correcta",
             next: {
               title: "Medición de control",
               step: "Paso a seguir: Medir líneas SDA, SCL, RST, CLK (ideal osciloscopio; si no, medir voltaje con multímetro).",
@@ -270,6 +271,7 @@ const placaTreeData = {
           },
           {
             label: "Incorrecta medición de alimentación",
+            kind: "incorrecta",
             solution:
               "Verificar fuente de alimentación (PMIC/LDO). Recordá medir la señal de control (EN/ENABLE) del LDO. Según el equipo, puede alimentarla un LDO dedicado, un PMIC de cámaras o el PMIC principal."
           }
@@ -278,6 +280,7 @@ const placaTreeData = {
     },
     {
       label: "Incorrecta medición de señales de referencia",
+      kind: "incorrecta",
       solution:
         "Si el valor está OL (abierto/muy alto), el problema suele ser resistor, filtro EMI, bobina o IC. Si está en 0 (corto/muy bajo), el responsable suele ser un condensador o IC."
     }
@@ -285,10 +288,9 @@ const placaTreeData = {
 };
 
 // ==================== Render del árbol ====================
-let placaStack = []; // historial para "Atrás"
+let placaStack = [];
 
 function placaNodoActual() {
-  // último de la pila o raíz
   return placaStack.length ? placaStack[placaStack.length - 1] : placaTreeData;
 }
 
@@ -297,7 +299,6 @@ function renderPlacaNodo(nodo) {
   if (!cont) return;
   cont.innerHTML = "";
 
-  // Título (H2) + Paso
   const h2 = document.createElement("h2");
   h2.textContent = nodo.title || "Fallas en placa";
   h2.className = "hud-appear";
@@ -311,7 +312,6 @@ function renderPlacaNodo(nodo) {
     cont.appendChild(p);
   }
 
-  // Si hay solución final, mostramos caja y terminamos
   if (nodo.solution) {
     const sol = document.createElement("div");
     sol.className = "response-box hud-appear";
@@ -320,22 +320,18 @@ function renderPlacaNodo(nodo) {
     return;
   }
 
-  // Mostrar opciones como botones
   if (Array.isArray(nodo.options)) {
     nodo.options.forEach(opt => {
-      const btn = document.createElement("button");
-      btn.textContent = opt.label;
-      btn.onclick = () => {
+      const btn = makeBranchButton(opt.label, opt.kind, () => {
         if (opt.next) {
           placaStack.push(opt.next);
           renderPlacaNodo(opt.next);
         } else if (opt.solution) {
-          // “Hoja” con solución
           const leaf = { title: nodo.title, step: nodo.step, solution: opt.solution };
           placaStack.push(leaf);
           renderPlacaNodo(leaf);
         }
-      };
+      });
       cont.appendChild(btn);
     });
   }
@@ -343,28 +339,23 @@ function renderPlacaNodo(nodo) {
 
 // ==================== UI helpers para este módulo ====================
 window.mostrarFallasPlaca = () => {
-  // Reutilizamos tu helper si existe
   if (typeof window.ocultarTodo === "function") window.ocultarTodo();
   const sec = document.getElementById("placaMenu");
   if (sec) {
     sec.style.display = "flex";
     sec.classList.add("hud-appear");
   }
-  // reset de navegación y render raíz
   placaStack = [];
   renderPlacaNodo(placaTreeData);
 };
 
 window.placaAtras = () => {
   if (!placaStack.length) {
-    // volver al menú de fallas si querés
     if (typeof window.mostrarFallas === "function") {
       window.mostrarFallas();
     } else {
-      // o al main
       if (typeof window.volverA === "function") window.volverA("main");
     }
-    // ocultar sección
     const sec = document.getElementById("placaMenu");
     if (sec) sec.style.display = "none";
     return;
