@@ -9,12 +9,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBW_GYELchHB-VoIc7TR1XPK-tkE4bLutg",
-  authDomain: "iniciopruebabeta.firebaseapp.com",
-  projectId: "iniciopruebabeta",
-  storageBucket: "iniciopruebabeta.firebasestorage.app",
-  messagingSenderId: "17837784293",
-  appId: "1:17837784293:web:94538fc553b24751b5680c"
+  apiKey: "AIzaSyD29DiaYJ1s3GeOSJKquL2jElp8NVoXAII",
+  authDomain: "login-de-diagnostico-de-placa.firebaseapp.com",
+  projectId: "login-de-diagnostico-de-placa",
+  storageBucket: "login-de-diagnostico-de-placa.firebasestorage.app",
+  messagingSenderId: "248604555689",
+  appId: "1:248604555689:web:f0f0f226bd8cd377dd6cb8"
 };
 
 const app = initializeApp(firebaseConfig);
