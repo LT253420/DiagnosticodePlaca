@@ -1,1 +1,1 @@
-# HerramientasDigitales
+# Diagnostico de placa
